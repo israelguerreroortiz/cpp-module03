@@ -3,54 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrguerr <isrguerr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iisraa11 <iisraa11@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:25:43 by isrguerr          #+#    #+#             */
-/*   Updated: 2026/05/15 19:02:32 by isrguerr         ###   ########.fr       */
+/*   Updated: 2026/06/08 21:03:15 by iisraa11         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 
 int main() {
-    ClapTrap clapy("Clapy");
-    ClapTrap trapy("Trapy");
-    
-    for (int i = 0; i < 10; i++) {
-        clapy.attack("Juanjo");
-    }
-    
-    
-    std::cout << "\n[No energy try]:" << std::endl;
-    clapy.attack("juanjo");
-    std::cout << std::endl;
+	std::cout << "=== ClapTrap tests ===" << std::endl;
 
-    std::cout << "-- DAMAGE WITHOUT ENERGY" << std::endl;
-    
-    clapy.takeDamage(5);
-    clapy.takeDamage(3);
-    std::cout << std::endl;
+	ClapTrap a("Alpha");
+	a.attack("Target1");
+	a.takeDamage(5);
+	a.beRepaired(3);
 
-    std::cout << "--- REPAIRING AND LIMITS ---" << std::endl;
-    
-    trapy.beRepaired(5);
-    
-    
-    trapy.takeDamage(20);
-    
-    
-    trapy.takeDamage(5);
-    std::cout << std::endl;
+	ClapTrap b(a);
+	std::cout << "Copy constructed ClapTrap b from a" << std::endl;
+	b.attack("Target2");
 
-    std::cout << "--- ROBOT WITH LIVE CAN'T ACT ---" << std::endl;
-    
-    trapy.attack("clap");
-    trapy.beRepaired(10);
-    clapy.beRepaired(10);
-    std::cout << std::endl;
+	ClapTrap c;
+	c = a;
+	std::cout << "Assigned ClapTrap c = a" << std::endl;
+	c.attack("Target3");
 
-    std::cout << "--- END ---" << std::endl;
-    
-    return 0;
+	std::cout << "\n=== ScavTrap tests ===" << std::endl;
+
+	ScavTrap s("Scavy");
+	s.attack("Enemy");
+	s.guardGate();
+	s.takeDamage(20);
+	s.beRepaired(10);
+
+	ScavTrap s2(s);
+	s2.guardGate();
+
+	ScavTrap s3;
+	s3 = s;
+	s3.attack("Another");
+
+	return 0;
 }

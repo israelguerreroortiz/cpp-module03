@@ -22,6 +22,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
     if (this != &other)
     {
+        this->name = other.name;
         this->damage = other.damage;
         this->health = other.health;
         this->energy = other.energy;
@@ -60,22 +61,23 @@ void ClapTrap::takeDamage(unsigned int amount)
     if (this->health < 1)
         return ;
 
-    this->health-= amount;
-    if (this->health < 0)
+    if (amount >= this->health)
         this->health = 0;
+    else
+        this->health-= amount;
     std::cout << this->name << " has been damaged with " << amount << " hit points\n";
 }
 
 int ClapTrap::checkAviability(void) const
 {
     int flag = 0;
-    if (this->energy < 1)
+    if (this->energy == 0)
     {
         std::cout << this->name << " doesn't have energy points\n";
         flag = 1;
     }
 
-    if (this->health < 1)
+    if (this->health == 0)
     {
         std::cout << this->name << " doesn't have health points\n";
         flag = 1;

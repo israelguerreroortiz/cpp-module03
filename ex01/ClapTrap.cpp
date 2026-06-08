@@ -3,18 +3,18 @@
 #include <iostream>
 
 ClapTrap::ClapTrap() : name("Default"), health(10), energy(10), damage(10) {
-    std::cout << "Base ClapTrap constructor called" << std::endl;
+    std::cout << "Base constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name) :  name(name), health(10), energy(10), damage(10)
 {
-    std::cout << "ClapTrap Constructor with arguments called\n";
+    std::cout << "Constructor with arguments called\n";
 };
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
     *this = other;
-    std::cout << "ClapTrap copy constructor called\n";
+    std::cout << "Copy constructor called\n";
 
 }
 
@@ -22,12 +22,13 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
     if (this != &other)
     {
+        this->name = other.name;
         this->damage = other.damage;
         this->health = other.health;
         this->energy = other.energy;
     }
 
-    std::cout << "ClapTrap copy assignment operator called\n";
+    std::cout << "Copy assignment operator called\n";
 
     return *this;
 }
@@ -40,7 +41,7 @@ void ClapTrap::attack(const std::string &target)
         return ;
         
     this->energy--;
-    std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!\n";
+    std::cout << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!\n";
 
 }
 
@@ -52,7 +53,7 @@ void ClapTrap::beRepaired(unsigned int amount)
     this->energy--;
     this->health+=amount;
 
-    std::cout << "ClapTrap " << this->name << " repairs itself, it regains " << amount << " hit points\n";
+    std::cout << this->name << " repairs itself, it regains " << amount << " hit points\n";
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -60,24 +61,25 @@ void ClapTrap::takeDamage(unsigned int amount)
     if (this->health < 1)
         return ;
 
-    this->health-= amount;
-    if (this->health < 0)
+    if (amount >= this->health)
         this->health = 0;
-    std::cout << "ClapTrap " << this->name << " has been damaged with " << amount << " hit points\n";
+    else
+        this->health-= amount;
+    std::cout << this->name << " has been damaged with " << amount << " hit points\n";
 }
 
 int ClapTrap::checkAviability(void) const
 {
     int flag = 0;
-    if (this->energy < 1)
+    if (this->energy == 0)
     {
-        std::cout << "ClapTrap " << this->name << " doesn't have energy points\n";
+        std::cout << this->name << " doesn't have energy points\n";
         flag = 1;
     }
 
-    if (this->health < 1)
+    if (this->health == 0)
     {
-        std::cout << "ClapTrap " << this->name << " doesn't have health points\n";
+        std::cout << this->name << " doesn't have health points\n";
         flag = 1;
     }
 
