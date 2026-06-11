@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <FragTrap.hpp>
+#include "FragTrap.hpp"
 #include <iostream>
 
 FragTrap::FragTrap() : ClapTrap() {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ScavTrap.hpp>
+#include "ScavTrap.hpp"
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap() {

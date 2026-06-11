@@ -12,7 +12,7 @@
 
 #pragma once
 #include <string>
-#include <ClapTrap.hpp>
+#include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap{
     public:
